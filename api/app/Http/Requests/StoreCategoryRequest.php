@@ -26,4 +26,14 @@ class StoreCategoryRequest extends FormRequest
             'name'=>'required|string|max:100|unique:categories,name'
         ];
     }
+    
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'De categorienaam is verplicht.',
+            'name.string' => 'De categorienaam moet tekst zijn.',
+            'name.max' => 'De categorienaam mag maximaal 100 tekens bevatten.',
+            'name.unique' => 'Deze categorienaam bestaat al.',
+        ];
+    }
 }

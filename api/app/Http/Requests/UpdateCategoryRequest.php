@@ -27,4 +27,14 @@ class UpdateCategoryRequest extends FormRequest
             'name'=>['required', 'string', 'max:100', Rule::unique('categories', 'name')->ignore($this->route('id'))]
         ];
     }
+    
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'De categorienaam is verplicht.',
+            'name.string' => 'De categorienaam moet tekst zijn.',
+            'name.max' => 'De categorienaam mag maximaal 100 tekens bevatten.',
+            'name.unique' => 'Deze categorienaam bestaat al.',
+        ];
+    }
 }

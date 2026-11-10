@@ -36,4 +36,28 @@ class ProductIndexRequest extends FormRequest
             'per_page'=>'nullable|integer|min:1|max:100'
         ];
     }
+    
+    public function messages(): array
+    {
+        return [
+            'search.string' => 'De zoekterm moet tekst zijn.',
+            'category.exists' => 'De geselecteerde categorie bestaat niet.',
+            'min_price.integer' => 'De minimumprijs moet een geheel getal zijn.',
+            'min_price.min' => 'De minimumprijs mag niet lager zijn dan 0.',
+            'min_price.max' => 'De minimumprijs mag niet hoger zijn dan €100.000.',
+            'max_price.integer' => 'De maximumprijs moet een geheel getal zijn.',
+            'max_price.min' => 'De maximumprijs mag niet lager zijn dan 0.',
+            'max_price.max' => 'De maximumprijs mag niet hoger zijn dan €100.000.',
+            'max_price.gte' => 'De maximumprijs moet groter dan of gelijk aan de minimumprijs zijn.',
+            'in_stock.in' => 'De voorraadfilter moet 1 zijn.',
+            'is_active.in' => 'De actieve status moet 0 of 1 zijn.',
+            'sort.in' => 'Het geselecteerde sorteerveld is ongeldig.',
+            'direction.in' => 'De sorteerrichting moet asc of desc zijn.',
+            'page.integer' => 'Het paginanummer moet een geheel getal zijn.',
+            'page.min' => 'Het paginanummer moet minimaal 1 zijn.',
+            'per_page.integer' => 'Het aantal resultaten moet een geheel getal zijn.',
+            'per_page.min' => 'Het aantal resultaten moet minimaal 1 zijn.',
+            'per_page.max' => 'Er mogen maximaal 100 resultaten per pagina worden opgevraagd.',
+        ];
+    }
 }
