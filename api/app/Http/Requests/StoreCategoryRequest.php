@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -14,6 +15,17 @@ class StoreCategoryRequest extends FormRequest
     {
         return true;
     }
+    
+    protected function prepareForValidation(): void
+    {
+        $name = $this->input('name');
+
+        if (is_string($name)) {
+            $this->merge([
+                'slug' => Str::slug($name),
+            ]);
+        }
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -23,7 +35,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string|max:100|unique:categories,name'
+            'name'=>'required|string|max:100|unique:categories,name',
+            'slug' => 'required|string|unique:categories,slug',
         ];
     }
     
@@ -34,6 +47,7 @@ class StoreCategoryRequest extends FormRequest
             'name.string' => 'De categorienaam moet tekst zijn.',
             'name.max' => 'De categorienaam mag maximaal 100 tekens bevatten.',
             'name.unique' => 'Deze categorienaam bestaat al.',
+            'slug.unique' => 'Deze categorienaam bestaat al.',
         ];
     }
 }
