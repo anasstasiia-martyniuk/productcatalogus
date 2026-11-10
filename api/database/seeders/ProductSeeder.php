@@ -18,12 +18,7 @@ class ProductSeeder extends Seeder
         
         $products = Product::factory()
         ->count(150)
-        ->create()
-        ->each(function ($product) use ($categories) {
-            $product->update([
-            'category_id'=> fn () => $categories->random()->id,
-            ]);
-        });
+        ->create();
         
         foreach([0, 1, 2, 3, 4] as $index => $stock){
             $products[$index]->update([
